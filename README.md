@@ -16,13 +16,13 @@ The user can start typing a city name and then browse the suggestions with up/do
 
 ## Main Components
 
-the App itself is mainly a GtkSearchBar and a GtkSearchEntry interacting with the open weather map free account API.
+The App itself is mainly a GtkSearchBar and a GtkSearchEntry interacting with the open weather map free account API.
 
 ### GtkSearchBar && GtkSearchEntry
 
 The open weather map API provides an updated json file containing the list of cities in addition to few other information about the cities, we used this file containing more than 200k cities to provide suggestions on search query change (for a query equal or bigger than 3 characters).
 
-Since we have to look up for potential matches every time the search query change, it should be ressource consuming and we designed a data structure inspired by [trie](https://en.wikipedia.org/wiki/Trie) to make looking for a suggestion nearly in constant in complexity, like a tree of Python dictionaries.
+Since we have to look up for potential matches every time the search query change, it should be ressource consuming and we designed a data structure inspired by [trie](https://en.wikipedia.org/wiki/Trie) to make looking for a suggestion nearly in constant complexity (using hash maps or python dictionaries), as a tree of Python dictionaries.
 
 Little to no documentation was found on about how to put a GtkSearchBar && a GtkSearchEntry together except these two ressources [GtkSearchEntry](https://developer.gnome.org/gtk3/stable/GtkSearchEntry.html) && [GtkSearchBar](https://developer.gnome.org/gtk3/stable/GtkSearchBar.html) and [this](https://gitlab.gnome.org/GNOME/gtk/blob/gtk-3-24/examples/search-bar.c) example, they are all in **C programming language**.
 
