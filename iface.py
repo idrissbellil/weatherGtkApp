@@ -1,3 +1,7 @@
+# Defining here the main UI component to create a workspace rather than defining
+# them as global variables since components signals need to access these views
+# all the time
+
 import gi
 from utils import *
 gi.require_version('Gtk', '3.0')
