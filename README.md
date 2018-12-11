@@ -1,6 +1,6 @@
 # Weather Gtk App
 
-This app is a unfinished product for a another weather Gtk based application written in Python.
+This app is a unfinished product for a another weather Gtk based application written in Python, it was meant to be a technical challenge in order to have the right to interview for a position some time ago.
 
 ## Running the App
 
