@@ -1,3 +1,5 @@
+# This should certainly be redesigned as OOP
+
 import requests
 import json
 import iface
@@ -58,6 +60,9 @@ def trie_to_list(it):
     return list(it.keys())
 
 def sync_response(city):
+    """
+    Uses the Open Weather Map API to provide a json results of the weather API
+    """
     user_key = 'be984db413b4ecae2062c6801b3240dd'
     url = "http://api.openweathermap.org/data/2.5/forecast?q={}&APPID={}&units=metric"\
             .format(city, user_key)
@@ -76,6 +81,9 @@ def json2citylist(fn):
 
 def get_suggestions(string, trie):
     it_suggestions = find_substr(string, trie)
+    
+    # This to take only 3 top suggestions to overload user's
+    # computer with city suggestions
     suggestions = trie_to_list(it_suggestions)[:3]
     return suggestions
 
