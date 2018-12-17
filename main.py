@@ -117,6 +117,10 @@ def main():
     iface.search_bar.set_search_mode(False)
     iface.search_bar.connect_entry(iface.search_entry)
 
+    # provide one city as an example
+    data = sync_response('tlemcen')
+    Handler().update_ui(data)
+
     # Show and run
     iface.win.show_all()
     iface.win.connect("destroy", Gtk.main_quit)
