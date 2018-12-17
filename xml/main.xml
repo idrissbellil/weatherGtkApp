@@ -4,7 +4,7 @@
   <requires lib="gtk+" version="3.12"/>
   <object class="GtkWindow" id="main_window">
     <property name="can_focus">False</property>
-    <property name="default_width">400</property>
+    <property name="default_width">600</property>
     <property name="default_height">400</property>
     <child>
       <placeholder/>
@@ -63,6 +63,7 @@
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="homogeneous">True</property>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
@@ -73,6 +74,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">humidity:</property>
+                        <property name="justify">center</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -85,6 +87,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Pressure:</property>
+                        <property name="justify">center</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -97,6 +100,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Min / Max</property>
+                        <property name="justify">center</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -138,6 +142,7 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">Beijing : 0 °C, 10 km/h</property>
+                            <property name="justify">center</property>
                           </object>
                           <packing>
                             <property name="expand">True</property>
@@ -150,6 +155,7 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">Cloud, Overcast Cloud</property>
+                            <property name="justify">center</property>
                           </object>
                           <packing>
                             <property name="expand">True</property>
@@ -173,7 +179,7 @@
                 </child>
               </object>
               <packing>
-                <property name="expand">False</property>
+                <property name="expand">True</property>
                 <property name="fill">True</property>
                 <property name="position">0</property>
               </packing>
@@ -182,7 +188,7 @@
               <object class="GtkScrolledWindow">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="vscrollbar_policy">never</property>
+                <property name="hscrollbar_policy">never</property>
                 <property name="shadow_type">in</property>
                 <child>
                   <object class="GtkViewport">

@@ -58,20 +58,22 @@ class Handler:
         curr_time = time() - timezone
         tm = int((curr_time // (3*3600)) * (3*3600))
         found = False
+
         for elem in data['list']:
             if elem['dt'] == tm :
                 found = True
                 break
         if not found :
             return
-        city += ': ' + str(elem['main']['temp']) + '°C, ' +\
+
+        city += ': ' + str(elem['main']['temp']) + '°C\n' +\
                 str(elem['wind']['speed']) + ' km/h'
         iface.city.set_label(city)
         iface.pressure.set_label('Pressure: ' + str(elem['main']['pressure']))
         iface.humidity.set_label('Humidity: ' + str(elem['main']['humidity']))
         iface.minmax.set_label('{} ~ {} °C'.format(elem['main']['temp_min'],
             elem['main']['temp_max']))
-        iface.comment.set_label(elem['weather'][0]['main'] + ', ' + 
+        iface.comment.set_label(elem['weather'][0]['main'] + '\n' + 
                 elem['weather'][0]['description'])
         url = 'http://openweathermap.org/img/w/{}.png'.format(elem['weather'][0]['icon'])
         response = requests.get(url)
