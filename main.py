@@ -4,7 +4,7 @@ from gi.repository import Gtk
 from gi.repository import Gio
 from gi.repository.GdkPixbuf import Pixbuf
 from io import BytesIO
-from time import time
+from time import time, timezone
 import requests
 import json
 import iface
@@ -55,7 +55,7 @@ class Handler:
 
     def update_ui(self, data):
         city = data['city']['name']
-        curr_time = time() + 8*3600
+        curr_time = time() - timezone
         tm = int((curr_time // (3*3600)) * (3*3600))
         found = False
         for elem in data['list']:
