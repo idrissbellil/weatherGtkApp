@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.22.1 -->
 <interface>
-  <requires lib="gtk+" version="3.0"/>
+  <requires lib="gtk+" version="3.12"/>
   <object class="GtkWindow" id="main_window">
     <property name="can_focus">False</property>
     <property name="default_width">400</property>
@@ -172,6 +172,32 @@
             <property name="expand">True</property>
             <property name="fill">True</property>
             <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="vscrollbar_policy">never</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkViewport">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="vscroll_policy">natural</property>
+                <child>
+                  <object class="GtkListBox" id="list_times">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
           </packing>
         </child>
       </object>
