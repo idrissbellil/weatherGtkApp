@@ -1,10 +1,11 @@
 # This should certainly be redesigned as OOP
-
+from pathlib import Path
 import json
 import requests
 import json
 import iface
 from copy import deepcopy
+from time import time, timezone
 
 def create_dict(word, dic={}, n=3):
     """Create a trie with dictionaries as nodes given one word
@@ -66,15 +67,52 @@ def sync_response(city):
     """
     user_key = 'be984db413b4ecae2062c6801b3240dd'
     url = "http://api.openweathermap.org/data/2.5/forecast?q={}&APPID={}&units=metric"\
-            .format(city, user_key)
+              .format(city, user_key)
 
     # Test First if we have a recent record of this entry in our log
-    with open('log/dump.log', 'r') as f:
-        dump = json.dump(f)
+    try :
+        with open('log/dump.log', 'r') as f:
+            store = json.load(f)
 
-    # Symc if necessary
+    except Exception as e:
+        print(e)
+        store = {}
+        log = Path('log')
+        if not log.exists():
+            log.mkdir()
+            
+    else:
+        if city in store.keys() :
+          curr_time = time() - timezone
+          time_slot = int((curr_time // (3*3600)) * (3*3600))
+          # the openweather api suggests sync every 3 hours
+          if ((time() - store[city]['updated']) <= 3*3600) and\
+                (str(time_slot) in store[city].keys()):
+            # execution finishes here if city, time updated found
+            print('no need to lookup again')
+            return store[city], city
+            
+    print('sending request again')
+        
+    # Sync if necessary
     response = requests.get(url)
-    return response.json()
+    data = response.json()
+    
+    if data['cod'] == '200':
+      city = data['city']['name'].lower()
+      if city not in store.keys():
+        store[city] = {}
+      for elem in data['list']:
+        store[city][str(elem['dt'])] = elem
+    
+      store[city]['updated'] = time()
+      with open('log/dump.log', 'w') as f:
+        json.dump(store, f)
+      
+      return store[city], city
+      
+    else:
+      return None, None
 
 def json2citylist(fn):
     """Parse the json file looking only for city names"""

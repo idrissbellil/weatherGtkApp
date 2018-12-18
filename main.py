@@ -3,6 +3,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from gi.repository import Gio
 from gi.repository.GdkPixbuf import Pixbuf
+from threading import Thread
 from io import BytesIO
 from time import time, timezone
 import requests
@@ -42,44 +43,50 @@ class Handler:
         iface.search_entry.set_text(search_query)
 
         # search the query and show the results
-        data = sync_response(search_query)
-        
-        if data['cod'] == '200':
-            # update ui and save the current query
-            self.update_ui(data)
-            self.save_query(data)
+        t = Thread(target=sync_updateui, args=[search_query])
+        t.start()
 
-            # clean up for the next request
+        # clean up for the next request
         self.delete_search_rows()
         iface.win.show_all()
 
-    def update_ui(self, data):
-        city = data['city']['name']
+    def update_ui(self, data, city):
+        if data is None:
+          return
         curr_time = time() - timezone
         tm = int((curr_time // (3*3600)) * (3*3600))
         found = False
 
-        for elem in data['list']:
-            if elem['dt'] == tm :
-                found = True
-                break
-        if not found :
-            return
+        if str(tm) not in data.keys():
+          return
+        elem = data[str(tm)]
 
+        # Load element results and set it in the interface
         city += ': ' + str(elem['main']['temp']) + '°C\n' +\
                 str(elem['wind']['speed']) + ' km/h'
         iface.city.set_label(city)
+        
+        # set the pressure
         iface.pressure.set_label('Pressure: ' + str(elem['main']['pressure']))
+        # set the Humidity
         iface.humidity.set_label('Humidity: ' + str(elem['main']['humidity']))
+        # set temperatures max and min
         iface.minmax.set_label('{} ~ {} °C'.format(elem['main']['temp_min'],
             elem['main']['temp_max']))
+            
+        # set the comment and the description
         iface.comment.set_label(elem['weather'][0]['main'] + '\n' + 
                 elem['weather'][0]['description'])
-        url = 'http://openweathermap.org/img/w/{}.png'.format(elem['weather'][0]['icon'])
+                
+        # get the icon and show it
+        url = 'http://openweathermap.org/img/w/{}.png'.format(
+                  elem['weather'][0]['icon'])
         response = requests.get(url)
         input_stream = Gio.MemoryInputStream.new_from_data(response.content, None) 
         pixbuf = Pixbuf.new_from_stream(input_stream, None) 
         iface.weather_icon.set_from_pixbuf(pixbuf)
+        
+        # turn searchBar search mode to off
         iface.search_bar.set_search_mode(False)
 
 
@@ -120,13 +127,19 @@ def main():
     iface.search_bar.connect_entry(iface.search_entry)
 
     # provide one city as an example
-    data = sync_response('tlemcen')
-    Handler().update_ui(data)
+    t = Thread(target=sync_updateui, args=['tlemcen'])
+    t.start()
 
     # Show and run
     iface.win.show_all()
     iface.win.connect("destroy", Gtk.main_quit)
     Gtk.main()
+    t.join()
 
+def sync_updateui(city):
+# This is meant to be used inside a thread
+  data, city = sync_response(city)
+  Handler().update_ui(data, city)
+  
 if __name__=='__main__':
     main()
