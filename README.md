@@ -1,6 +1,6 @@
 # Weather Gtk App
 
-This app is a unfinished product for a another weather Gtk based application written in Python, it was meant to be a technical challenge in order to have the right to interview for a position some time ago.
+This app is a unfinished product for a another weather Gtk based application written in **Python 3** (because of pathlib), it was meant to be a technical challenge in order to have the right to interview for a position some time ago.
 
 ## Running the App
 
@@ -9,7 +9,7 @@ This App was tested under Python 3.7.1 and Gtk 3.24.1
 ```
 git clone https://github.com/idrissbellil/weatherGtkApp.git
 cd weatherGtkApp
-python main.py
+python3 main.py
 ```
 
 The user can start typing a city name and then browse the suggestions with up/down keys or a one mouse click, if the desired city doesn't show up and the user insists on using the entered name for query, the app will keep showing a suggestion of the same query he's entering.
