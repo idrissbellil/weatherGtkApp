@@ -1,5 +1,6 @@
 # This should certainly be redesigned as OOP
 
+from pathlib import Path
 import json
 import requests
 import json
@@ -69,8 +70,16 @@ def sync_response(city):
             .format(city, user_key)
 
     # Test First if we have a recent record of this entry in our log
-    with open('log/dump.log', 'r') as f:
-        dump = json.dump(f)
+    try :
+        with open('log/dump.log', 'r') as f:
+            store = json.load(f)
+
+    except Exception as e:
+        print(e)
+        store = {}
+        log = Path('log')
+        if not log.exists():
+            log.mkdir()
 
     # Symc if necessary
     response = requests.get(url)
