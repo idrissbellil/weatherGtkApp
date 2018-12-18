@@ -17,6 +17,8 @@ trie = create_trie(cities_list)
 
 win = builder.get_object('main_window')
 
+container = builder.get_object('weather_container')
+
 search_bar = builder.get_object('search_bar')
 
 search_entry = builder.get_object('search_entry')

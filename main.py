@@ -50,11 +50,13 @@ class Handler:
         self.delete_search_rows()
         iface.win.show_all()
 
-    def update_ui(self, data, city):
+    def update_ui(self, data, city, tm=None):
         if data is None:
           return
-        curr_time = time() - timezone
-        tm = int((curr_time // (3*3600)) * (3*3600))
+
+        if tm is None:
+            curr_time = time() - timezone
+            tm = int((curr_time // (3*3600)) * (3*3600))
         found = False
 
         if str(tm) not in data.keys():
@@ -141,5 +143,9 @@ def sync_updateui(city):
   data, city = sync_response(city)
   Handler().update_ui(data, city)
   
+class WeatherWidget(Gtk.Box):
+
+    def __init__(self, data, tm):
+        pass
 if __name__=='__main__':
     main()
