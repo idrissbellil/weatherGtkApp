@@ -1,5 +1,6 @@
 # This should certainly be redesigned as OOP
 
+import json
 import requests
 import json
 import iface
@@ -67,6 +68,11 @@ def sync_response(city):
     url = "http://api.openweathermap.org/data/2.5/forecast?q={}&APPID={}&units=metric"\
             .format(city, user_key)
 
+    # Test First if we have a recent record of this entry in our log
+    with open('log/dump.log', 'r') as f:
+        dump = json.dump(f)
+
+    # Symc if necessary
     response = requests.get(url)
     return response.json()
 
