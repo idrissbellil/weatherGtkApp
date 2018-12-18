@@ -7,6 +7,10 @@ from utils import *
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
+HORIZONTAL = 0
+
+VERTICAL = 1
+
 builder = Gtk.Builder()
 
 builder.add_from_file("xml/main.xml")
