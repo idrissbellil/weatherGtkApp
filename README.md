@@ -34,6 +34,7 @@ For GtkSearchBar && GtkSearchEntry usage the ressource [Gtk.listbox](https://pyt
 
 ### The open weather map api
 
-We encountered one major problem with this API: **Time zones**.
+The Open Weather Map API was used, with a free subscription that provides a limited number of requests per day. The API provides the weather forcast for the next 3 days with a step of 3h. The API suggests to sync in every 3h which I exactly did in this application.
 
-The json (default) output of this API provides no information about the timezone, while I am in China I provided a +8h manually in the script which is not an elegant way to solve this limitation. A more complete way should be to process the text given back by the API and compare it to the Unix UTC format time given. This and several other problems will solved given more time.
+In addition to weather forecast it also provides icons with a direct link, which was convenient while using the API.
+
