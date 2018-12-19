@@ -5,6 +5,7 @@ from gi.repository.GdkPixbuf import Pixbuf
 from io import BytesIO
 from time import time, timezone, strftime, localtime
 import requests
+from glob import glob
 import json
 import iface
 from copy import deepcopy
@@ -12,6 +13,13 @@ from utils import *
 
 class Handler:
     def onDestroy(self, *args):
+        try:
+            print('SAVING THE ICONS')
+            for key in iface.icons.keys():
+                iface.icons[key].savev('icons/{}.png'.format(key), 'png', [], [])
+        except Exception as e:
+            print(e)
+            pass
         Gtk.main_quit()
     
     def add(self, arg, add):
@@ -216,9 +224,17 @@ def main():
     # provide one city as an example
     GLib.idle_add(sync_updateui, 'tlemcen')
 
+    try:
+        names = glob('icons/*.png')
+        for name in names:
+            pixbuf = Pixbuf.new_from_file(name)
+            key = name.split('/')[1].split('.')[0]
+            iface.icons[key] = pixbuf
+    except:
+        pass
+
     # Show and run
     iface.win.show_all()
-    iface.win.connect("destroy", Gtk.main_quit)
     Gtk.main()
 
 if __name__=='__main__':
