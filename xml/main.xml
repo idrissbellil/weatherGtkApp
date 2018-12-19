@@ -199,6 +199,7 @@
                       <object class="GtkListBox" id="weather_container">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <signal name="row-activated" handler="time_activated" swapped="no"/>
                       </object>
                     </child>
                   </object>

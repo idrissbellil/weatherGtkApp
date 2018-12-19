@@ -13,6 +13,8 @@ VERTICAL = 1
 
 builder = Gtk.Builder()
 
+icons = {}
+
 builder.add_from_file("xml/main.xml")
 
 cities_list = json2citylist('city.list.json')

@@ -75,7 +75,6 @@ def sync_response(city):
             store = json.load(f)
 
     except Exception as e:
-        print(e)
         store = {}
         log = Path('log')
         if not log.exists():
@@ -89,11 +88,8 @@ def sync_response(city):
           if ((time() - store[city]['updated']) <= 3*3600) and\
                 (str(time_slot) in store[city].keys()):
             # execution finishes here if city, time updated found
-            print('no need to lookup again')
             return store[city], city
             
-    print('sending request again')
-        
     # Sync if necessary
     response = requests.get(url)
     data = response.json()
