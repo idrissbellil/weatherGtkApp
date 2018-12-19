@@ -2,6 +2,9 @@
 
 This app is a unfinished product for a another weather Gtk based application written in **Python 3** (because of pathlib), it was meant to be a technical challenge in order to have the right to interview for a position some time ago.
 
+The First execution takes some time (from 5s to 20s) to load all the icons (for the next 3 days) from the provided API then it caches them in the application itself. It gets much faster after first location being loaded since most weather icons are already downloaded.
+![Gif demo](weather.gif)
+
 ## Running the App
 
 This App was tested under Python 3.7.1 and Gtk 3.24.1
@@ -14,7 +17,7 @@ python3 main.py
 
 The user can start typing a city name and then browse the suggestions with up/down keys or a one mouse click, if the desired city doesn't show up and the user insists on using the entered name for query, the app will keep showing a suggestion of the same query he's entering.
 
-![Gif demo](weather.gif)
+![Gif demo](weather_2.gif)
 
 ## Main Components
 
