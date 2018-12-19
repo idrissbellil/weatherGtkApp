@@ -3,6 +3,7 @@
 This app is a unfinished product for a another weather Gtk based application written in **Python 3** (because of pathlib), it was meant to be a technical challenge in order to have the right to interview for a position some time ago.
 
 The First execution takes some time (from 5s to 20s) to load all the icons (for the next 3 days) from the provided API then it caches them in the application itself. It gets much faster after first location being loaded since most weather icons are already downloaded.
+
 ![Gif demo](weather.gif)
 
 ## Running the App
@@ -29,9 +30,7 @@ The open weather map API provides an updated json file containing the list of ci
 
 Since we have to look up for potential matches every time the search query change, it should be ressource consuming and we designed a data structure inspired by [trie](https://en.wikipedia.org/wiki/Trie) to make looking for a suggestion nearly in constant complexity (using hash maps or python dictionaries), as a tree of Python dictionaries.
 
-Little to no documentation was found on about how to put a GtkSearchBar && a GtkSearchEntry together except these two ressources [GtkSearchEntry](https://developer.gnome.org/gtk3/stable/GtkSearchEntry.html) && [GtkSearchBar](https://developer.gnome.org/gtk3/stable/GtkSearchBar.html) and [this](https://gitlab.gnome.org/GNOME/gtk/blob/gtk-3-24/examples/search-bar.c) example, they are all in **C programming language**.
-
-Again two stackoverflow threads helped with the usage of the GtkImage component. The rest are all simple labels easy to interact with.
+For GtkSearchBar && GtkSearchEntry usage the ressource [Gtk.listbox](https://python-gtk-3-tutorial.readthedocs.io/en/latest/layout.html#listbox) was useful in addition to these two ressources [GtkSearchEntry](https://developer.gnome.org/gtk3/stable/GtkSearchEntry.html) && [GtkSearchBar](https://developer.gnome.org/gtk3/stable/GtkSearchBar.html) and [this](https://gitlab.gnome.org/GNOME/gtk/blob/gtk-3-24/examples/search-bar.c) example, which is in **C**.
 
 ### The open weather map api
 
