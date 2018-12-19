@@ -129,7 +129,7 @@ class Handler:
         pass
     
     def changed(self, arg):
-        self.delete_search_rows()
+        self.delete_search_rows(keep_right=True)
         iface.search_bar.set_search_mode(True)
 
         search_str = iface.search_entry.get_text().lower()
@@ -149,13 +149,14 @@ class Handler:
         iface.search_bar.set_search_mode(False)
         self.delete_search_rows()
 
-    def delete_search_rows(self):
+    def delete_search_rows(self, keep_right=False):
         lbox = iface.list_box
         widbox = iface.container
         for row in lbox.get_children():
             lbox.remove(row)
-        for row in widbox.get_children():
-            widbox.remove(row)
+        if not keep_right:
+            for row in widbox.get_children():
+                widbox.remove(row)
 
 def sync_right_panel(data, city):
     for dt in data.keys():
