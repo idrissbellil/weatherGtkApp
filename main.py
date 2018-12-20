@@ -182,7 +182,7 @@ class WeatherWidget(Gtk.ListBoxRow):
         box.set_orientation(1)
         self.add(box)
 
-        converted_time = int(tm) - timezone 
+        converted_time = int(tm) + timezone 
         formatted_time = strftime('%A %H:%M',localtime(int(converted_time)))
         curr_time = Gtk.Label(label=formatted_time)
         box.pack_start(curr_time, True, True, 0)
