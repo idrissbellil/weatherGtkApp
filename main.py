@@ -234,6 +234,12 @@ def main():
     except:
         pass
 
+    iface.stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT_RIGHT)
+    iface.stack.set_transition_duration(1000)
+    
+    fig_container = Gtk.Box()
+    iface.stack.add_titled(fig_container, "fig_container", "Statistics")
+
     # Show and run
     iface.win.show_all()
     Gtk.main()

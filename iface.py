@@ -23,6 +23,12 @@ trie = create_trie(cities_list)
 
 win = builder.get_object('main_window')
 
+stack = builder.get_object('stack')
+
+stack_switcher = builder.get_object('stack_switcher')
+
+stack_switcher.set_stack(stack)
+
 container = builder.get_object('weather_container')
 
 search_bar = builder.get_object('search_bar')
