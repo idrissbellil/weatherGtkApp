@@ -2,6 +2,8 @@
 
 This app is a unfinished product for a another weather Gtk based application written in **Python 3** (because of pathlib), it was meant to be a technical challenge in order to have the right to interview for a position some time ago.
 
+**The app is reported that it doesn't load the weather on startup, which I believe is due to timezone issue, I will attempt to solve that given some free time**
+
 ## Running the App
 
 This App was tested under Python 3.7.1 and Gtk 3.24.1
