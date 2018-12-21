@@ -89,8 +89,10 @@ class Handler:
         found = False
 
         if str(tm) not in data.keys():
-          return
-        elem = data[str(tm)]
+          key = list(data.keys())[0]
+          elem = data[key]
+        else :
+          elem = data[str(tm)]
 
         # Load element results and set it in the interface
         city_field = city +  ': ' + str(elem['main']['temp']) + '°C\n' +\

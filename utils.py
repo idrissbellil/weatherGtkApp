@@ -91,6 +91,7 @@ def sync_response(city):
             return store[city], city
             
     # Sync if necessary
+    print('City not found so loading the data from the internet')
     response = requests.get(url)
     data = response.json()
     
@@ -104,10 +105,11 @@ def sync_response(city):
       store[city]['updated'] = time()
       with open('log/dump.log', 'w') as f:
         json.dump(store, f)
-      
+
       return store[city], city
       
     else:
+      print(data)
       return None, None
 
 def json2citylist(fn):
