@@ -14,7 +14,7 @@ python3 main.py
 
 The user can start typing a city name and then browse the suggestions with up/down keys or a one mouse click, if the desired city doesn't show up and the user insists on using the entered name for query, the app will keep showing a suggestion of the same query he's entering.
 
-![Gif demo](weather_2.gif)
+![Gif demo](weather.gif)
 
 ## Main Components
 
