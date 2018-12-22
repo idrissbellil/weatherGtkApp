@@ -19,7 +19,7 @@ builder.add_from_file("xml/main.xml")
 
 cities_list = json2citylist('city.list.json')
 
-trie = create_trie(cities_list)
+trie = CustomTrie(cities_list)
 
 win = builder.get_object('main_window')
 

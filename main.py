@@ -136,7 +136,7 @@ class Handler:
 
         search_str = iface.search_entry.get_text().lower()
         if len(search_str)>=3 :
-            suggestions = get_suggestions(search_str, iface.trie)
+            suggestions = iface.trie.get_suggestions(search_str)
             self.add_row(search_str)
             for suggestion in suggestions:
                 self.add_row(search_str + suggestion)
