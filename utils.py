@@ -30,30 +30,30 @@ class CustomTrie:
         for word in word_list:
             self.add_word(word, n=n)
     
-    def find_substring(self, sub):
+    def find_substring(self, sub, n=3):
         """Find a substring in a trie
         """
         it = self.trie
-        if sub[:3] in it.keys():
-            it = it[sub[:3]]
+        if sub[:n] in it.keys():
+            it = it[sub[:n]]
         else :
             return {}
-        for char in sub[3:]:
+        for char in sub[n:]:
             if char in it.keys():
                 it = it[char]
             else :
                 break
         return deepcopy(it)
     
-    def get_suggestions(self, substring):
+    def get_suggestions(self, substring, n=3):
         """Get a pointer to the top of a trie that
         matches the given sub-string suggestions
         """
         it_suggestions = self.find_substring(substring)
         
-        # This to take only 3 top suggestions not to overload user's
+        # This to take only n top suggestions not to overload user's
         # ui with city suggestions
-        suggestions = self.tolist(it_suggestions)[:3]
+        suggestions = self.tolist(it_suggestions)[:n]
         return suggestions
     
     
@@ -101,9 +101,10 @@ def sync_response(city):
     else:
         if city in store.keys() :
           curr_time = time() - timezone
-          time_slot = int((curr_time // (3*3600)) * (3*3600))
+          three_hours = 3*3600
+          time_slot = int((curr_time // three_hours) * three_hours)
           # the openweather api suggests sync every 3 hours
-          if ((time() - store[city]['updated']) <= 3*3600) and\
+          if ((time() - store[city]['updated']) <= three_hours) and\
                 (str(time_slot) in store[city].keys()):
             # execution finishes here if city, time updated found
             return store[city], city
